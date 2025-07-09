@@ -81,29 +81,35 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
     setOpenModal(false);
   };
 
+  const inputs: {
+    name: keyof SaleEntry;
+    type: string;
+    placeholder?: string;
+  }[] = [
+    { name: "name", type: "text", placeholder: "Name" },
+    { name: "email", type: "email", placeholder: "Email" },
+    { name: "date", type: "date" },
+    { name: "description", type: "text", placeholder: "Description" },
+    { name: "amount", type: "number", placeholder: "Amount" },
+    { name: "receiptLink", type: "text", placeholder: "Receipt Link" },
+  ];
+
   return (
-    <div className=" inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 overflow-auto">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md overflow-y-auto max-h-[90vh]">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 overflow-auto">
+      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
         <h2 className="text-xl font-semibold mb-4 text-center">
           {editingIndex !== null
             ? "Edit Expense Entry"
             : "Create Expense Entry"}
         </h2>
         <form onSubmit={handleSubmit} className="space-y-3">
-          {[
-            { name: "name", type: "text", placeholder: "Name" },
-            { name: "email", type: "email", placeholder: "Email" },
-            { name: "date", type: "date" },
-            { name: "description", type: "text", placeholder: "Description" },
-            { name: "amount", type: "number", placeholder: "Amount" },
-            { name: "receiptLink", type: "text", placeholder: "Receipt Link" },
-          ].map(({ name, type, placeholder }) => (
+          {inputs.map(({ name, type, placeholder }) => (
             <input
               key={name}
               name={name}
               type={type}
               placeholder={placeholder}
-              value={(formData as any)[name]}
+              value={formData[name] ?? ""}
               onChange={handleChange}
               required={name !== "description" && name !== "receiptLink"}
               className="w-full p-2 border border-gray-300 rounded"
@@ -139,7 +145,7 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
               </option>
             ))}
           </select>
-          <div className="flex justify-end gap-2">
+          <div className="flex justify-end gap-2 flex-wrap">
             <Button
               type="button"
               variant="outline"
@@ -147,7 +153,7 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
             >
               Cancel
             </Button>
-            <Button type="submit">
+            <Button type="submit" className="min-w-[100px]">
               {editingIndex !== null ? "Update" : "Submit"}
             </Button>
           </div>
@@ -254,6 +260,7 @@ export default function Home() {
               setInitialData(null);
               setOpenModal(true);
             }}
+            className="whitespace-nowrap"
           >
             Create Expense Entry
           </Button>
@@ -265,7 +272,7 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <div className="w-full overflow-x-auto">
-              <Table className="min-w-[800px]">
+              <Table className="min-w-[700px] sm:min-w-full">
                 <TableHeader>
                   <TableRow>
                     <TableHead>Name</TableHead>
@@ -296,13 +303,13 @@ export default function Home() {
                           href={sale.receiptLink}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-blue-500 hover:underline"
+                          className="text-blue-500 hover:underline break-all"
                         >
                           Link
                         </a>
                       </TableCell>
                       <TableCell>
-                        <div className="flex gap-2">
+                        <div className="flex gap-2 flex-wrap">
                           <Button
                             variant="outline"
                             size="sm"
@@ -333,7 +340,7 @@ export default function Home() {
           </CardHeader>
           <CardContent className="overflow-x-auto">
             <div className="min-w-[300px] sm:min-w-full">
-              <Bar data={chartData} />
+              <Bar data={chartData} options={{ maintainAspectRatio: false }} />
             </div>
           </CardContent>
         </Card>
