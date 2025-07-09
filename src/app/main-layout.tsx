@@ -1,5 +1,5 @@
 "use client";
-import { Github, Home, LayoutDashboard, LucideIcon } from "lucide-react";
+import { Github, LayoutDashboard, LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -41,7 +41,6 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
       <Sidebar>
         <SidebarHeader className="px-6 py-4">
           <Link href="/" className="flex items-center space-x-2">
-            {/* <Home className="h-6 w-6" /> */}
             <Image
               aria-hidden
               src={"https://alaainvest.com/frontend/logo.svg"}
