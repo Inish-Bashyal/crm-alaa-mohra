@@ -1,12 +1,5 @@
 "use client";
-import {
-  Calendar1,
-  Github,
-  Home,
-  LayoutDashboard,
-  LucideIcon,
-  Table2,
-} from "lucide-react";
+import { Github, Home, LayoutDashboard, LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import * as React from "react";
@@ -24,6 +17,7 @@ import {
 } from "@/components/ui/sidebar";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 interface NavItem {
   title: string;
@@ -37,21 +31,6 @@ const navItems: NavItem[] = [
     href: "/",
     icon: LayoutDashboard,
   },
-  {
-    title: "Table View",
-    href: "/table",
-    icon: Table2,
-  },
-  {
-    title: "Calendar View",
-    href: "/examples/calendar",
-    icon: Calendar1,
-  },
-  {
-    title: "Kanban View",
-    href: "/examples/kanban",
-    icon: LayoutDashboard,
-  },
 ];
 
 export function MainLayout({ children }: { children: React.ReactNode }) {
@@ -62,8 +41,15 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
       <Sidebar>
         <SidebarHeader className="px-6 py-4">
           <Link href="/" className="flex items-center space-x-2">
-            <Home className="h-6 w-6" />
-            <span className="text-xl font-semibold">Logo</span>
+            {/* <Home className="h-6 w-6" /> */}
+            <Image
+              aria-hidden
+              src={"https://alaainvest.com/frontend/logo.svg"}
+              alt="File icon"
+              width={100}
+              height={100}
+              className="h-30 w-30"
+            />
           </Link>
         </SidebarHeader>
         <SidebarContent className="p-4">
@@ -94,7 +80,7 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             <SidebarTrigger />
             <div className="flex-1 flex items-center justify-end gap-4">
               <ThemeToggle />{" "}
-              <Link href="https://github.com/bprabin811/NextJS-views-template">
+              <Link href="https://github.com/Inish-Bashyal">
                 <Button size="icon" variant="outline">
                   <Github className="h-[1.2rem] w-[1.2rem]" />
                 </Button>

@@ -17,8 +17,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "App template",
-  description: "NextJs app template",
+  title: "ALAA MOHRA PROPERTIES",
+  description: "ALAA MOHRA PROPERTIES",
 };
 
 export default function RootLayout({
