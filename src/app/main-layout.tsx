@@ -37,17 +37,19 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   return (
-    <div className="flex h-screen overflow-hidden w-full">
-      <Sidebar>
-        <SidebarHeader className="px-6 py-4">
+    <div className="flex h-screen w-full overflow-hidden">
+      <Sidebar className="hidden md:flex ">
+        {" "}
+        {/* Hidden on small screens */}
+        <SidebarHeader className="px-4 py-4">
           <Link href="/" className="flex items-center space-x-2">
             <Image
               aria-hidden
-              src={"https://alaainvest.com/frontend/logo.svg"}
-              alt="File icon"
+              src="https://alaainvest.com/frontend/logo.svg"
+              alt="Logo"
               width={100}
               height={100}
-              className="h-30 w-30"
+              className="h-20 w-auto object-contain"
             />
           </Link>
         </SidebarHeader>
@@ -69,25 +71,31 @@ export function MainLayout({ children }: { children: React.ReactNode }) {
             ))}
           </SidebarMenu>
         </SidebarContent>
-        <SidebarFooter className="flex items-center flex-row gap-2">
+        <SidebarFooter className="flex items-center justify-center p-2">
           <span className="text-xs text-gray-500">v1.0.0</span>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset>
-        <div className="flex h-full flex-col">
-          <header className="flex h-14 items-center gap-4 border-b bg-background px-6">
-            <SidebarTrigger />
-            <div className="flex-1 flex items-center justify-end gap-4">
-              <ThemeToggle />{" "}
-              <Link href="https://github.com/Inish-Bashyal">
-                <Button size="icon" variant="outline">
-                  <Github className="h-[1.2rem] w-[1.2rem]" />
-                </Button>
-              </Link>
-            </div>
-          </header>
-          <main className="flex-1 overflow-auto p-6">{children}</main>
-        </div>
+
+      {/* Main content area */}
+      <SidebarInset className="flex flex-col w-full">
+        <header className="flex flex-wrap items-center justify-between gap-4 border-b bg-background px-4 py-3 sm:px-6 sm:py-4">
+          <div className="flex items-center gap-2">
+            <SidebarTrigger className="block md:hidden" />{" "}
+            {/* Only show on small screens */}
+            <span className="text-lg font-semibold sm:text-xl">Dashboard</span>
+          </div>
+
+          <div className="flex items-center gap-2 sm:gap-4">
+            <ThemeToggle />
+            <Link href="https://github.com/Inish-Bashyal">
+              <Button size="icon" variant="outline">
+                <Github className="h-[1.2rem] w-[1.2rem]" />
+              </Button>
+            </Link>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-auto p-4 sm:p-6">{children}</main>
       </SidebarInset>
     </div>
   );

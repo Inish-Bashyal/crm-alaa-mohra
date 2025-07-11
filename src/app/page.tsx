@@ -96,8 +96,8 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4 overflow-auto">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <h2 className="text-xl font-semibold mb-4 text-center">
+      <div className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-lg w-full max-w-md max-h-[90vh] overflow-y-auto border border-gray-200 dark:border-gray-700">
+        <h2 className="text-xl font-semibold mb-4 text-center text-gray-900 dark:text-white">
           {editingIndex !== null
             ? "Edit Expense Entry"
             : "Create Expense Entry"}
@@ -112,7 +112,7 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
               value={formData[name] ?? ""}
               onChange={handleChange}
               required={name !== "description" && name !== "receiptLink"}
-              className="w-full p-2 border border-gray-300 rounded"
+              className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500"
             />
           ))}
           <select
@@ -120,7 +120,7 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
             value={formData.category}
             onChange={handleChange}
             required
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="">Select Category</option>
             {["Electronics", "Furniture", "Books", "Clothing", "Groceries"].map(
@@ -136,7 +136,7 @@ const ModalDialog: React.FC<ModalDialogProps> = ({
             value={formData.paymentMethod}
             onChange={handleChange}
             required
-            className="w-full p-2 border border-gray-300 rounded"
+            className="w-full p-2 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
           >
             <option value="">Select Payment Method</option>
             {["Credit Card", "Debit Card", "PayPal", "Cash"].map((pm) => (
@@ -248,9 +248,9 @@ export default function Home() {
         />
       )}
 
-      <div className="p-4 sm:p-6 max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-          <h1 className="text-2xl sm:text-3xl font-bold">
+      <div className="p-4 overflow-auto">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 w-full">
+          <h1 className="md:text-2xl sm:text-3xl font-bold">
             CRM for ALAA MOHRA Properties
           </h1>
           <Button
